@@ -23,6 +23,7 @@ before_script:
   - apk update
   - apk add gcc make linux-headers moreutils
   - apk add musl-dev shellcheck
+  - apk add fontconfig-dev libx11-dev libxft-dev libxinerama-dev
 
 test:
   stage: dev
