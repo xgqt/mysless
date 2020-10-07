@@ -31,16 +31,6 @@ dirs="
 
 ins_dir="$(pwd)/image/usr"
 
-exit_status=0
-
-
-die() {
-    echo "!!! Errors occured !!!"
-    echo "Exiting..."
-    exit_status=1
-    exit 1
-}
-
 
 case ${1}
 in
@@ -71,26 +61,22 @@ fi
 echo "ts implementation: ${ts_impl}"
 
 
-(
-    for d in ${dirs}
-    do
-        cd "${d}" || die
+for d in ${dirs}
+do
+    cd "${d}" || exit 1
 
-        make clean
+    make clean
 
-        if [ "${build}" -gt 0 ]
-        then
-            echo ">>> Building: ${d}"
-            make -j"$(nproc)" || die
-            make PREFIX="${ins_dir}" install || die
-            echo ">>> Buit: ${d}"
-        else
-            echo ">>> Cleaned: ${d}"
-        fi
+    if [ "${build}" -gt 0 ]
+    then
+        echo ">>> Building: ${d}"
+        make -j"$(nproc)" || exit 1
+        make PREFIX="${ins_dir}" install || exit 1
+        echo ">>> Buit: ${d}"
+    else
+        echo ">>> Cleaned: ${d}"
+    fi
 
-        cd - >/dev/null || die
-    done
-) | ${ts_impl} '[ %H:%M:%S ]:'
+    cd - >/dev/null || exit 1
+done
 
-
-exit ${exit_status}
