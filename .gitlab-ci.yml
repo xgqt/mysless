@@ -21,7 +21,8 @@ stages:
 
 before_script:
   - apk update
-  - apk add gcc make moreutils musl-dev shellcheck
+  - apk add gcc make linux-headers moreutils
+  - apk add musl-dev shellcheck
 
 test:
   stage: dev
