@@ -27,4 +27,4 @@ test:
   stage: dev
   script:
     - sh shellcheck.sh
-    - sh dev.sh
+    - sh dev.sh --build
