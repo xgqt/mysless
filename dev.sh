@@ -93,9 +93,4 @@ echo "ts implementation: ${ts_impl}"
 ) | ${ts_impl} '[ %H:%M:%S ]:'
 
 
-if [ ${exit_status} -gt 0 ]
-then
-    exit 1
-else
-    exit 0
-fi
+exit ${exit_status}
