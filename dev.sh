@@ -46,14 +46,26 @@ in
         ;;
 esac
 
+
 [ -d "${ins_dir}" ] && rm -rfd "${ins_dir}"
 mkdir -p "${ins_dir}"
+
+
+if command -v ts
+then
+    ts_impl="ts"
+else
+    ts_impl="busybox ts"
+fi
+
+echo "ts implementation: ${ts_impl}"
+
 
 (
     for d in ${dirs}
     do
         cd "${d}" || exit 1
-        
+
         make clean
 
         if [ "${build}" -gt 0 ]
@@ -65,7 +77,7 @@ mkdir -p "${ins_dir}"
         else
             echo ">>> Cleaned: ${d}"
         fi
-        
+
         cd - >/dev/null || exit 1
     done
-) | busybox ts '[ %H:%M:%S ]:'
+) | ${ts_impl} '[ %H:%M:%S ]:'
