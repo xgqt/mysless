@@ -21,7 +21,7 @@ stages:
 
 before_script:
   - apk update
-  - apk add gcc make linux-headers moreutils
+  - apk add gcc make ncurses linux-headers moreutils
   - apk add musl-dev shellcheck fontconfig-dev
   - apk add libx11-dev libxft-dev libxinerama-dev ncurses-dev
 
