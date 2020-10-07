@@ -51,16 +51,6 @@ esac
 mkdir -p "${ins_dir}"
 
 
-if command -v ts
-then
-    ts_impl="ts"
-else
-    ts_impl="busybox ts"
-fi
-
-echo "ts implementation: ${ts_impl}"
-
-
 for d in ${dirs}
 do
     cd "${d}" || exit 1
@@ -79,4 +69,3 @@ do
 
     cd - >/dev/null || exit 1
 done
-
